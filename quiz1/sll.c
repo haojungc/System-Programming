@@ -49,15 +49,24 @@ void remove_entry(node_t **head, node_t *entry)
     free(entry);
 }
 
-node_t *swap_pair(node_t *head)
+// node_t *swap_pair(node_t *head)
+// {
+//     for (node_t **node = &head; *node && (*node)->next; node = &(*node)->next->next) {
+//         node_t *tmp = *node;
+//         *node = (*node)->next;
+//         tmp->next = (*node)->next;
+//         (*node)->next = tmp;
+//     }
+//     return head;
+// }
+void swap_pair(node_t **indirect)
 {
-    for (node_t **node = &head; *node && (*node)->next; node = &(*node)->next->next) {
+    for (node_t **node = indirect; *node && (*node)->next; node = &(*node)->next->next) {
         node_t *tmp = *node;
         *node = (*node)->next;
         tmp->next = (*node)->next;
         (*node)->next = tmp;
     }
-    return head;
 }
 
 node_t *reverse(node_t *head)
