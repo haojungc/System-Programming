@@ -59,9 +59,9 @@ void swap_pair(node_t **indirect)
     }
 }
 
-node_t *reverse(node_t *head)
+void reverse(node_t **indirect)
 {
-    return rev_recursive(head, NULL);
+    *indirect = rev_recursive(*indirect, NULL);
 }
 
 node_t *rev_recursive(node_t *current, node_t *prev) {
