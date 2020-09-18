@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "sll.h"
 
 int main(int argc, char const *argv[])
 {
+    srand(time(NULL));
+    
     node_t *head = NULL;
 
     print_list(head);
@@ -32,6 +35,9 @@ int main(int argc, char const *argv[])
     print_list(head);
 
     reverse(&head);
+    print_list(head);
+
+    fisher_yates_shuffle(&head);
     print_list(head);
 
     return 0;

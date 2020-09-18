@@ -12,6 +12,7 @@ void remove_entry(node_t **head, node_t *entry);
 void swap_pair(node_t **indirect);
 void reverse(node_t **indirect);
 node_t *rev_recursive(node_t *current, node_t *prev);
+void fisher_yates_shuffle(node_t **indirect);
 void print_list(node_t *head);
 
 #endif

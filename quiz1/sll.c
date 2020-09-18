@@ -74,6 +74,45 @@ node_t *rev_recursive(node_t *current, node_t *prev) {
     return rev_recursive(next, current);
 }
 
+void fisher_yates_shuffle(node_t **head_address) {
+    int count = 0;
+    node_t **indirect = head_address;
+
+    /* Counts the number of nodes in the list */
+    while (*indirect) {
+        indirect = &(*indirect)->next;
+        count++;
+    }
+
+    node_t **node = malloc(sizeof(node_t*) * (count + 1));
+    indirect = head_address;
+    count = 0;
+
+    /* Stores the addresses of each node in the list */
+    while (*indirect) {
+        node[count++] = *indirect;
+        indirect = &(*indirect)->next;
+    }
+    node[count] = NULL;
+
+    /* Shuffles the addresses of each node */
+    for (int i = count - 1; i >= 1; i--) {
+        int target = rand() % (i + 1);
+        node_t *tmp = node[i];
+        node[i] = node[target];
+        node[target] = tmp;
+    }
+
+    /* Reconnects each node */
+    for (int i = 0; i < count; i++)
+        node[i]->next = node[i + 1];
+    
+    /* Updates head */
+    *head_address = node[0];
+
+    free(node);
+}
+
 void print_list(node_t *head)
 {
     for (node_t *current = head; current; current = current->next)
