@@ -3,6 +3,15 @@
 #include <assert.h>
 #include "sll.h"
 
+static void *safe_malloc(size_t size) {
+    void *ptr = malloc(size);
+    if (ptr == NULL) {
+        fprintf(stderr, "Error: failed to allocate memory.\n");
+        exit(EXIT_FAILURE);
+    }
+    return ptr;
+}
+
 /* Appends a new node to the list */
 void add_entry(node_t **head, int new_value)
 {
@@ -11,7 +20,7 @@ void add_entry(node_t **head, int new_value)
      * in the list */
     node_t **indirect = head;
 
-    node_t *new_node = malloc(sizeof(node_t));
+    node_t *new_node = safe_malloc(sizeof(node_t));
 
     /* Checks if the memory is successfully allocated */
     assert(new_node); /* AA1 */
@@ -84,7 +93,7 @@ void fisher_yates_shuffle(node_t **head_address) {
         count++;
     }
 
-    node_t **node = malloc(sizeof(node_t*) * (count + 1));
+    node_t **node = safe_malloc(sizeof(node_t*) * (count + 1));
     indirect = head_address;
     count = 0;
 
